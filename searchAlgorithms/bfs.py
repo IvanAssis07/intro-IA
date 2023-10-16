@@ -38,7 +38,7 @@ def bfs(initialState):
         while currentNode.parent != None:
           path.append(currentNode.parent)
           currentNode = currentNode.parent
-        return path[::-1]
+        return path
 
       if currentNode.children[i] not in explored:
         frontier.enqueue(currentNode.children[i])

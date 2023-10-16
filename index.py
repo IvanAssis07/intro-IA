@@ -29,15 +29,16 @@ def getEntry():
 	print(f"Print Steps: {showIterations}")
 
 def printPath(path):
-  for i in range(len(path)):
-    print(path[i].board[0:3])
-    print(path[i].board[3:6])
-    print(path[i].board[6:9], "\n")
+  while len(path) > 0:
+    board = path.pop().board
+    print(board[0:3])
+    print(board[3:6])
+    print(board[6:9], "\n")
 
 def main():
 	getEntry()
 
-	# path = bfs(eightPuzzle)
+	path = bfs(eightPuzzle)
 	path = ids(eightPuzzle)
 
 	if (len(path) == 0):

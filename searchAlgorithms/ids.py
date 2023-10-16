@@ -46,4 +46,4 @@ def ids(initialState):
   else:
     path.append(result)
 
-  return path[::-1]
+  return path
