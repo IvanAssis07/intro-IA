@@ -12,6 +12,7 @@ def printExplored(explored):
     print('\n')
 
 def bfs(initialState):
+  print("BFS")
   frontier = Queue()
   explored = set()
   path = []
@@ -22,7 +23,6 @@ def bfs(initialState):
   while not frontier.is_empty():
     currentNode = frontier.dequeue()
     explored.add(currentNode)
-    # print(currentNode, currentNode.zeroIdx)
     
     if currentNode.goalTest():
       path.append(currentNode)
@@ -32,7 +32,6 @@ def bfs(initialState):
 
     for i in range(len(currentNode.children)):
       if currentNode.children[i].goalTest():
-        print(currentNode)
         path.append(currentNode.children[i])
         path.append(currentNode)
 

@@ -1,11 +1,11 @@
 import numpy as np
 
 goalState = np.array([1,2,3,4,5,6,7,8,0])
-
 class Node:
     def __init__(self, data):
         self.board = data
         self.strBoard = str(data)
+        self.depth = 0
         self.parent = None
         self.children = []
         self.zeroIdx = np.where(data == 0)[0][0]
@@ -28,6 +28,7 @@ class Node:
         child = Node(copyPuzzle)
         self.children.append(child)
         child.parent = self
+        child.depth = self.depth + 1
 
     def moveLeft(self, state, zeroIdx):
       if (zeroIdx % 3 > 0):
@@ -38,6 +39,7 @@ class Node:
         child = Node(copyPuzzle)
         self.children.append(child)
         child.parent = self  
+        child.depth = self.depth + 1
 
     def moveDown(self, state, zeroIdx):
       if (zeroIdx < 6):
@@ -48,7 +50,7 @@ class Node:
         child = Node(copyPuzzle)
         self.children.append(child)
         child.parent = self
-      
+        child.depth = self.depth + 1
 
     def moveUp(self, state, index):
       if (index > 2):
@@ -59,6 +61,7 @@ class Node:
         child = Node(copyPuzzle)
         self.children.append(child)
         child.parent = self
+        child.depth = self.depth + 1
     
     def expandNode(self):
       self.moveDown(self.board, self.zeroIdx)

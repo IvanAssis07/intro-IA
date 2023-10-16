@@ -2,6 +2,7 @@ import sys
 import numpy as np
 
 from searchAlgorithms.bfs import bfs
+from searchAlgorithms.ids import ids
 
 eightPuzzle = np.zeros(9, dtype=int)
 showIterations = False
@@ -21,7 +22,6 @@ def getEntry():
 		eightPuzzle[i] = int(sys.argv[count])
 		count += 1
           
-	
 	if (type(sys.argv[-1]) is not int):
 		showIterations = True
 
@@ -37,7 +37,8 @@ def printPath(path):
 def main():
 	getEntry()
 
-	path = bfs(eightPuzzle)
+	# path = bfs(eightPuzzle)
+	path = ids(eightPuzzle)
 
 	if (len(path) == 0):
 		print("No solution found")
