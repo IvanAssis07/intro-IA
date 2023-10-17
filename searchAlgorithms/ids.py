@@ -4,9 +4,9 @@ import numpy as np
 from structures.stack import Stack
 from structures.node import Node
 
-GOAL_STATE = np.array([1,2,3,4,5,6,7,8,0])
+exploredNodes = 0
 
-def dls(initialState, limit):
+def dls(initialState, limit, isTest):
   frontier = Stack()
   explored = set()
   result = None
@@ -16,6 +16,11 @@ def dls(initialState, limit):
 
   while frontier.is_empty() == False:
     currentNode = frontier.pop()
+    
+    if isTest:  
+      global exploredNodes
+      exploredNodes += 1
+
     explored.add(currentNode)
 
     if currentNode.goalTest():
@@ -38,13 +43,13 @@ def ids(initialState, printSteps, isTest):
   result = None
 
   while result == None:
-    result = dls(initialState, limit)
+    result = dls(initialState, limit, isTest)
     limit += 1
 
   if printSteps:
     result.printPath()
   if isTest:
     executionTime = time.time() - startingTime
-    print("Execution time: ", executionTime)
+    print("Exec time:", executionTime, "Explored nodes:", exploredNodes)
 
   return

@@ -46,7 +46,7 @@ def executeAlgorithm(algorithm, showSteps, isTest):
 		# greedy(eightPuzzle, "misplacedTiles", showSteps, isTest)
 		
 def main():
-	isTest = False
+	isTest = True
 	algorithm, showSteps = getEntry()
 	
 	executeAlgorithm(algorithm, showSteps, isTest)

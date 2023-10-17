@@ -9,6 +9,7 @@ GOAL_STATE = np.array([1,2,3,4,5,6,7,8,0])
 def ucs(initialState, printSteps, isTest):
   if isTest:
     startingTime = time.time()
+    exploredNodes = 0
     
   root = Node(initialState)
   frontier = []
@@ -24,10 +25,12 @@ def ucs(initialState, printSteps, isTest):
         currentNode.printPath()
       if isTest:
         executionTime = time.time() - startingTime
-        print("Execution time: ", executionTime)
+        print("Exec time:", executionTime, "Explored nodes:", exploredNodes)
       return  
     
     explored.add(currentNode)
+    if isTest:
+      exploredNodes += 1
 
     currentNode.expandNode(None)
 

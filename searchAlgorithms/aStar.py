@@ -9,6 +9,7 @@ GOAL_STATE = np.array([1,2,3,4,5,6,7,8,0])
 def aStar(initialState, heuristic, printSteps, isTest):
   if isTest:
     startingTime = time.time()
+    exploredNodes = 0
 
   root = Node(initialState)
   frontier = []
@@ -20,12 +21,15 @@ def aStar(initialState, heuristic, printSteps, isTest):
     frontier.sort(key = lambda x: x.cost)
     currentNode = frontier.pop(0)
 
+    if isTest:
+      exploredNodes += 1
+      
     if currentNode.goalTest():
       if printSteps:
         currentNode.printPath()
       if isTest:
         executionTime = time.time() - startingTime
-        print("Execution time: ", executionTime)
+        print("Exec time:", executionTime, "Explored nodes:", exploredNodes)
       return
     
     explored.add(currentNode)

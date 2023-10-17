@@ -16,6 +16,7 @@ def printExplored(explored):
 def bfs(initialState, printSteps, isTest):
   if isTest:
     startingTime = time.time()
+    exploredNodes = 0
 
   frontier = Queue()
   explored = set()
@@ -26,13 +27,15 @@ def bfs(initialState, printSteps, isTest):
   while not frontier.is_empty():
     currentNode = frontier.dequeue()
     explored.add(currentNode)
+    if isTest:
+      exploredNodes += 1
 
     if currentNode.goalTest():
       if printSteps:
         currentNode.printPath()
       if isTest:
         executionTime = time.time() - startingTime
-        print("Execution time: ", executionTime)
+        print("Exec time:", executionTime, "Explored nodes:", exploredNodes)
       return
     
     currentNode.expandNode(heuristic = None)
@@ -43,7 +46,7 @@ def bfs(initialState, printSteps, isTest):
           currentNode.children[i].printPath()
         if isTest:
           executionTime = time.time() - startingTime
-          print("Execution time: ", executionTime)
+          print("Exec time:", executionTime, "Explored nodes:", exploredNodes)
         return
 
       if currentNode.children[i] not in explored:
