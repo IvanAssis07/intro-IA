@@ -1,6 +1,7 @@
 import numpy as np
 
 from structures.heuristcs import manhattanDistance, misplacedTiles
+from structures.stack import Stack
 
 goalState = np.array([1,2,3,4,5,6,7,8,0])
 class Node:
@@ -15,13 +16,38 @@ class Node:
         self.heuristic = 0
 
     def __str__(self):
-        return str(self.board)
+      result = ""
+      for i in range(0, 9):
+        if i % 3 == 0 and i != 0:
+            result += "\n"
+        if (self.zeroIdx == i):
+          result += "  "
+        else:
+          result += f"{self.board[i]} "
+      result += "\n"
+      return result
     
     def __hash__(self):
       return hash(self.strBoard)
     
     def __eq__(self, other):
         return isinstance(other, Node) and self.strBoard == other.strBoard
+    
+    def printPath(self):
+      steps = 0
+      path = Stack()
+      path.push(self)
+      node = self.parent
+      
+      while node is not None:
+        steps += 1
+        path.push(node)
+        node = node.parent
+
+      print(steps, "\n")
+      while not path.is_empty():
+        node = path.pop()
+        print(node)
     
     def moveRight(self, state, zeroIdx, heuristic):
       if (zeroIdx % 3 < 2):

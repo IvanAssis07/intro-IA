@@ -11,11 +11,9 @@ def printExplored(explored):
     print(explored[i].board[6:9])
     print('\n')
 
-def bfs(initialState):
-  print("BFS")
+def bfs(initialState, printSteps):
   frontier = Queue()
   explored = set()
-  path = []
   
   root = Node(initialState)
   frontier.enqueue(root)
@@ -25,22 +23,19 @@ def bfs(initialState):
     explored.add(currentNode)
     
     if currentNode.goalTest():
-      path.append(currentNode)
-      return path
+      if printSteps:
+        currentNode.printPath()
+      return
     
-    currentNode.expandNode()
+    currentNode.expandNode(heuristic = None)
 
     for i in range(len(currentNode.children)):
       if currentNode.children[i].goalTest():
-        path.append(currentNode.children[i])
-        path.append(currentNode)
-
-        while currentNode.parent != None:
-          path.append(currentNode.parent)
-          currentNode = currentNode.parent
-        return path
+        if printSteps:
+          currentNode.children[i].printPath()
+        return
 
       if currentNode.children[i] not in explored:
         frontier.enqueue(currentNode.children[i])
   
-  return path
+  return 
