@@ -2,7 +2,6 @@ import numpy as np
 
 from structures.stack import Stack
 from structures.node import Node
-from heuristics import manhattanDist, misplacedTiles
 
 GOAL_STATE = np.array([1,2,3,4,5,6,7,8,0])
 
@@ -31,16 +30,10 @@ def aStar(initialState, heuristic):
     currentNode.expandNode(heuristic)
 
     for i in range(len(currentNode.children)):
-      if currentNode.children[i].goalTest():
-        path.append(currentNode.children[i])
-        path.append(currentNode)
-
-        while currentNode.parent != None:
-          path.append(currentNode.parent)
-          currentNode = currentNode.parent
-        return path
-
-      if currentNode.children[i] not in explored:
+      if currentNode.children[i] not in explored or currentNode.children[i] not in frontier:
+        frontier.append(currentNode.children[i])
+      elif currentNode.children[i] in frontier and currentNode.children[i].cost < frontier[frontier.index(currentNode.children[i])].cost:
+        frontier.remove(currentNode.children[i])
         frontier.append(currentNode.children[i])
 
   return path

@@ -5,6 +5,7 @@ from searchAlgorithms.bfs import bfs
 from searchAlgorithms.ids import ids
 from searchAlgorithms.ucs import ucs
 from searchAlgorithms.aStar import aStar
+from searchAlgorithms.greedy import greedy
 
 eightPuzzle = np.zeros(9, dtype=int)
 showIterations = False
@@ -42,8 +43,9 @@ def main():
 
 	# path = bfs(eightPuzzle)
 	# path = ids(eightPuzzle)
-	path = aStar(initialState=eightPuzzle, heuristic="manhattanDist")
+	# path = aStar(initialState=eightPuzzle, heuristic="manhattanDist")
 	# path = aStar(initialState=eightPuzzle, heuristic="misplacedTiles")
+	path = greedy(initialState=eightPuzzle, heuristic="manhattanDist")
   
 	if (len(path) == 0):
 		print("No solution found")

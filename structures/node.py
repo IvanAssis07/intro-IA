@@ -12,7 +12,7 @@ class Node:
         self.children = []
         self.zeroIdx = np.where(data == 0)[0][0]
         self.cost = 0
-        self.heuristic = None
+        self.heuristic = 0
 
     def __str__(self):
         return str(self.board)
