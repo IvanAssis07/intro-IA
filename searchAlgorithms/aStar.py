@@ -6,12 +6,6 @@ from heuristics import manhattanDist, misplacedTiles
 
 GOAL_STATE = np.array([1,2,3,4,5,6,7,8,0])
 
-def defineHeuristic(heuristic, state):
-  if heuristic == "manhattanDist":
-    return manhattanDist(state)
-  elif heuristic == "misplacedTiles":
-    return misplacedTiles(state)
-
 def aStar(initialState, heuristic):
   print("A*")
   root = Node(initialState)
@@ -24,7 +18,6 @@ def aStar(initialState, heuristic):
   while (len(frontier) > 0):
     frontier.sort(key = lambda x: x.cost)
     currentNode = frontier.pop(0)
-    explored.add(currentNode)
 
     if currentNode.goalTest():
       path.append(currentNode)
@@ -33,10 +26,9 @@ def aStar(initialState, heuristic):
         path.append(currentNode.parent)
         currentNode = currentNode.parent
       return path
-
-    explored.add(currentNode)
     
-    currentNode.expandNode()
+    explored.add(currentNode)
+    currentNode.expandNode(heuristic)
 
     for i in range(len(currentNode.children)):
       if currentNode.children[i].goalTest():
@@ -49,6 +41,6 @@ def aStar(initialState, heuristic):
         return path
 
       if currentNode.children[i] not in explored:
-        frontier.push(currentNode.children[i])
+        frontier.append(currentNode.children[i])
 
   return path
