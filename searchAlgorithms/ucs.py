@@ -1,10 +1,15 @@
+import time
+import numpy as np
+
 from structures.stack import Stack
 from structures.node import Node
-import numpy as np
 
 GOAL_STATE = np.array([1,2,3,4,5,6,7,8,0])
 
-def ucs(initialState, printSteps):
+def ucs(initialState, printSteps, isTest):
+  if isTest:
+    startingTime = time.time()
+    
   root = Node(initialState)
   frontier = []
   frontier.append(root)
@@ -17,6 +22,9 @@ def ucs(initialState, printSteps):
     if currentNode.goalTest():
       if printSteps:
         currentNode.printPath()
+      if isTest:
+        executionTime = time.time() - startingTime
+        print("Execution time: ", executionTime)
       return  
     
     explored.add(currentNode)

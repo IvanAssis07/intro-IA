@@ -1,6 +1,8 @@
+import time
+import numpy as np
+
 from structures.stack import Stack
 from structures.node import Node
-import numpy as np
 
 GOAL_STATE = np.array([1,2,3,4,5,6,7,8,0])
 
@@ -28,8 +30,10 @@ def dls(initialState, limit):
   
   return result
 
-def ids(initialState, printSteps):
-  print("IDS")
+def ids(initialState, printSteps, isTest):
+  if isTest:
+    startingTime = time.time()
+
   limit = 0
   result = None
 
@@ -39,5 +43,8 @@ def ids(initialState, printSteps):
 
   if printSteps:
     result.printPath()
+  if isTest:
+    executionTime = time.time() - startingTime
+    print("Execution time: ", executionTime)
 
   return

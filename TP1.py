@@ -31,25 +31,25 @@ def getEntry():
     
   return algorithm, showSteps
 
-def executeAlgorithm(algorithm, showSteps):
-	# B, I, U, A, G, H
+def executeAlgorithm(algorithm, showSteps, isTest):
 	if (algorithm == "B"):
-		bfs(initialState=eightPuzzle, printSteps=showSteps)
+		bfs(eightPuzzle, showSteps, isTest)
 	elif (algorithm == "I"):
-		ids(initialState=eightPuzzle, printSteps=showSteps)
+		ids(eightPuzzle, showSteps, isTest)
 	elif (algorithm == "U"):
-		ucs(initialState=eightPuzzle, printSteps=showSteps)
+		ucs(eightPuzzle, showSteps, isTest)
 	elif (algorithm == "A"):
-		aStar(initialState=eightPuzzle, heuristic="manhattanDist", printSteps=showSteps )
-		# aStar(initialState=eightPuzzle, heuristic="misplacedTiles", printSteps=showSteps)
+		aStar(eightPuzzle, "manhattanDist", showSteps, isTest)
+		# aStar(eightPuzzle, "misplacedTiles", showSteps, isTest)
 	elif (algorithm == "G"):
-		greedy(initialState=eightPuzzle, heuristic="manhattanDist", printSteps=showSteps)
-		# greedy(initialState=eightPuzzle, heuristic="misplacedTiles", printSteps=showSteps)
+		greedy(eightPuzzle, "manhattanDist", showSteps, isTest)
+		# greedy(eightPuzzle, "misplacedTiles", showSteps, isTest)
 		
 def main():
+	isTest = False
 	algorithm, showSteps = getEntry()
 	
-	executeAlgorithm(algorithm, showSteps)
+	executeAlgorithm(algorithm, showSteps, isTest)
 
 if __name__ == "__main__":
     main()

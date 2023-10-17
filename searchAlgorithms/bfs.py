@@ -1,6 +1,8 @@
+import time
+import numpy as np
+
 from structures.queue import Queue
 from structures.node import Node
-import numpy as np
 
 GOAL_STATE = np.array([1,2,3,4,5,6,7,8,0])
 
@@ -11,20 +13,26 @@ def printExplored(explored):
     print(explored[i].board[6:9])
     print('\n')
 
-def bfs(initialState, printSteps):
+def bfs(initialState, printSteps, isTest):
+  if isTest:
+    startingTime = time.time()
+
   frontier = Queue()
   explored = set()
   
   root = Node(initialState)
   frontier.enqueue(root)
-
+  
   while not frontier.is_empty():
     currentNode = frontier.dequeue()
     explored.add(currentNode)
-    
+
     if currentNode.goalTest():
       if printSteps:
         currentNode.printPath()
+      if isTest:
+        executionTime = time.time() - startingTime
+        print("Execution time: ", executionTime)
       return
     
     currentNode.expandNode(heuristic = None)
@@ -33,6 +41,9 @@ def bfs(initialState, printSteps):
       if currentNode.children[i].goalTest():
         if printSteps:
           currentNode.children[i].printPath()
+        if isTest:
+          executionTime = time.time() - startingTime
+          print("Execution time: ", executionTime)
         return
 
       if currentNode.children[i] not in explored:
