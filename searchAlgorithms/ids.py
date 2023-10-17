@@ -20,7 +20,7 @@ def dls(initialState, limit):
       result = currentNode
 
     if currentNode.depth < limit:
-      currentNode.expandNode()
+      currentNode.expandNode(None)
 
       for i in range(len(currentNode.children)):
         if currentNode.children[i] not in explored:
@@ -28,22 +28,16 @@ def dls(initialState, limit):
   
   return result
 
-def ids(initialState):
+def ids(initialState, printSteps):
   print("IDS")
   limit = 0
   result = None
-  path = []
 
   while result == None:
     result = dls(initialState, limit)
     limit += 1
 
-  if result.depth != 0:
-    while result.parent != None:
-      path.append(result)
-      result = result.parent
-    path.append(result)
-  else:
-    path.append(result)
+  if printSteps:
+    result.printPath()
 
-  return path
+  return

@@ -36,9 +36,9 @@ def executeAlgorithm(algorithm, showSteps):
 	if (algorithm == "B"):
 		bfs(initialState=eightPuzzle, printSteps=showSteps)
 	elif (algorithm == "I"):
-		ids(initialState=eightPuzzle)
+		ids(initialState=eightPuzzle, printSteps=showSteps)
 	elif (algorithm == "U"):
-		ucs(initialState=eightPuzzle)
+		ucs(initialState=eightPuzzle, printSteps=showSteps)
 	elif (algorithm == "A"):
 		aStar(initialState=eightPuzzle, heuristic="manhattanDist")
 		# aStar(initialState=eightPuzzle, heuristic="misplacedTiles")

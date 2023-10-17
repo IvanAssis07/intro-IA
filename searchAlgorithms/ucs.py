@@ -4,29 +4,24 @@ import numpy as np
 
 GOAL_STATE = np.array([1,2,3,4,5,6,7,8,0])
 
-def ucs(initialState):
-  print("UCS")
+def ucs(initialState, printSteps):
   root = Node(initialState)
   frontier = []
   frontier.append(root)
   explored = set()
-  path = []
 
   while (len(frontier) > 0):
     frontier.sort(key = lambda x: x.depth)
     currentNode = frontier.pop(0)
     
     if currentNode.goalTest():
-      path.append(currentNode)
-
-      while currentNode.parent != None:
-        path.append(currentNode.parent)
-        currentNode = currentNode.parent
-      return path
+      if printSteps:
+        currentNode.printPath()
+      return  
     
     explored.add(currentNode)
 
-    currentNode.expandNode()
+    currentNode.expandNode(None)
 
     for i in range(len(currentNode.children)):
       if currentNode.children[i] not in explored or currentNode.children[i] not in frontier:
@@ -35,5 +30,5 @@ def ucs(initialState):
         frontier.remove(currentNode.children[i])
         frontier.append(currentNode.children[i])
   
-  return path
+  return
   
