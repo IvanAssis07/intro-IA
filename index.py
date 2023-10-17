@@ -40,11 +40,11 @@ def executeAlgorithm(algorithm, showSteps):
 	elif (algorithm == "U"):
 		ucs(initialState=eightPuzzle, printSteps=showSteps)
 	elif (algorithm == "A"):
-		aStar(initialState=eightPuzzle, heuristic="manhattanDist")
-		# aStar(initialState=eightPuzzle, heuristic="misplacedTiles")
+		aStar(initialState=eightPuzzle, heuristic="manhattanDist", printSteps=showSteps )
+		# aStar(initialState=eightPuzzle, heuristic="misplacedTiles", printSteps=showSteps)
 	elif (algorithm == "G"):
-		greedy(initialState=eightPuzzle, heuristic="manhattanDist")
-		# greedy(initialState=eightPuzzle, heuristic="misplacedTiles")
+		greedy(initialState=eightPuzzle, heuristic="manhattanDist", printSteps=showSteps)
+		# greedy(initialState=eightPuzzle, heuristic="misplacedTiles", printSteps=showSteps)
 		
 def main():
 	algorithm, showSteps = getEntry()
