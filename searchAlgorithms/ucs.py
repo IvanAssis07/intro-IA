@@ -13,7 +13,7 @@ def ucs(initialState):
   path = []
 
   while (len(frontier) > 0):
-    frontier.sort(key = lambda x: x.cost)
+    frontier.sort(key = lambda x: x.depth)
     currentNode = frontier.pop(0)
     
     if currentNode.goalTest():
@@ -31,7 +31,7 @@ def ucs(initialState):
     for i in range(len(currentNode.children)):
       if currentNode.children[i] not in explored or currentNode.children[i] not in frontier:
         frontier.append(currentNode.children[i])
-      elif currentNode.children[i] in frontier and currentNode.children[i].cost < frontier[frontier.index(currentNode.children[i])].cost:
+      elif currentNode.children[i] in frontier and currentNode.children[i].depth < frontier[frontier.index(currentNode.children[i])].depth:
         frontier.remove(currentNode.children[i])
         frontier.append(currentNode.children[i])
   
