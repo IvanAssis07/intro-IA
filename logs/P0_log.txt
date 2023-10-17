@@ -1,7 +1,6 @@
 Algorithm: B
 Print Steps: True
-BFS
-IDS
+UCS
 Solution found with 0 steps
 [1 2 3]
 [4 5 6]

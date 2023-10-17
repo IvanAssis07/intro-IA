@@ -9,6 +9,8 @@ class Node:
         self.parent = None
         self.children = []
         self.zeroIdx = np.where(data == 0)[0][0]
+        self.cost = 0
+        self.heuristic = None
 
     def __str__(self):
         return str(self.board)
@@ -29,6 +31,7 @@ class Node:
         self.children.append(child)
         child.parent = self
         child.depth = self.depth + 1
+        child.cost = self.cost + 1 
 
     def moveLeft(self, state, zeroIdx):
       if (zeroIdx % 3 > 0):
@@ -40,6 +43,7 @@ class Node:
         self.children.append(child)
         child.parent = self  
         child.depth = self.depth + 1
+        child.cost = self.cost + 1
 
     def moveDown(self, state, zeroIdx):
       if (zeroIdx < 6):
@@ -51,6 +55,7 @@ class Node:
         self.children.append(child)
         child.parent = self
         child.depth = self.depth + 1
+        child.cost = self.cost + 1          
 
     def moveUp(self, state, index):
       if (index > 2):
@@ -62,6 +67,7 @@ class Node:
         self.children.append(child)
         child.parent = self
         child.depth = self.depth + 1
+        child.cost = self.cost + 1
     
     def expandNode(self):
       self.moveDown(self.board, self.zeroIdx)

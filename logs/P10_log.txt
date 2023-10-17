@@ -1,10 +1,26 @@
 Algorithm: B
 Print Steps: True
 UCS
-Solution found with 6 steps
+Solution found with 10 steps
+[5 8 2]
+[1 0 3]
+[4 7 6] 
+
+[5 0 2]
+[1 8 3]
+[4 7 6] 
+
+[0 5 2]
+[1 8 3]
+[4 7 6] 
+
+[1 5 2]
+[0 8 3]
+[4 7 6] 
+
 [1 5 2]
 [4 8 3]
-[7 6 0] 
+[0 7 6] 
 
 [1 5 2]
 [4 8 3]

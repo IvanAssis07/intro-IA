@@ -3,6 +3,7 @@ import numpy as np
 
 from searchAlgorithms.bfs import bfs
 from searchAlgorithms.ids import ids
+from searchAlgorithms.ucs import ucs
 
 eightPuzzle = np.zeros(9, dtype=int)
 showIterations = False
@@ -38,8 +39,9 @@ def printPath(path):
 def main():
 	getEntry()
 
-	path = bfs(eightPuzzle)
-	path = ids(eightPuzzle)
+	# path = bfs(eightPuzzle)
+	# path = ids(eightPuzzle)
+	path = ucs(eightPuzzle)
 
 	if (len(path) == 0):
 		print("No solution found")
