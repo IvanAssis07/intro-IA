@@ -49,11 +49,11 @@ class Node:
         node = path.pop()
         print(node)
     
-    def moveRight(self, state, zeroIdx, heuristic):
-      if (zeroIdx % 3 < 2):
-        copyPuzzle = np.copy(state)
+    def moveRight(self, heuristic):
+      if (self.zeroIdx % 3 < 2):
+        copyPuzzle = np.copy(self.board)
 
-        copyPuzzle[zeroIdx], copyPuzzle[zeroIdx + 1] = copyPuzzle[zeroIdx + 1], copyPuzzle[zeroIdx]
+        copyPuzzle[self.zeroIdx], copyPuzzle[self.zeroIdx + 1] = copyPuzzle[self.zeroIdx + 1], copyPuzzle[self.zeroIdx]
         
         child = Node(copyPuzzle)
         self.children.append(child)
@@ -69,11 +69,11 @@ class Node:
           child.cost = hsValue + child.depth #A* 
           child.heuristic = hsValue #Greedy
 
-    def moveLeft(self, state, zeroIdx, heuristic):
-      if (zeroIdx % 3 > 0):
-        copyPuzzle = np.copy(state)
+    def moveLeft(self, heuristic):
+      if (self.zeroIdx % 3 > 0):
+        copyPuzzle = np.copy(self.board)
 
-        copyPuzzle[zeroIdx], copyPuzzle[zeroIdx - 1] = copyPuzzle[zeroIdx - 1], copyPuzzle[zeroIdx]
+        copyPuzzle[self.zeroIdx], copyPuzzle[self.zeroIdx - 1] = copyPuzzle[self.zeroIdx - 1], copyPuzzle[self.zeroIdx]
       
         child = Node(copyPuzzle)
         self.children.append(child)
@@ -89,11 +89,11 @@ class Node:
           child.cost = hsValue + child.depth #A* 
           child.heuristic = hsValue #Greedy
 
-    def moveDown(self, state, zeroIdx, heuristic):
-      if (zeroIdx < 6):
-        copyPuzzle = np.copy(state)
+    def moveDown(self, heuristic):
+      if (self.zeroIdx < 6):
+        copyPuzzle = np.copy(self.board)
 
-        copyPuzzle[zeroIdx], copyPuzzle[zeroIdx + 3] = copyPuzzle[zeroIdx + 3], copyPuzzle[zeroIdx]
+        copyPuzzle[self.zeroIdx], copyPuzzle[self.zeroIdx + 3] = copyPuzzle[self.zeroIdx + 3], copyPuzzle[self.zeroIdx]
       
         child = Node(copyPuzzle)
         self.children.append(child)
@@ -109,11 +109,11 @@ class Node:
           child.cost = hsValue + child.depth #A* 
           child.heuristic = hsValue #Greedy         
 
-    def moveUp(self, state, index, heuristic):
-      if (index > 2):
-        copyPuzzle = np.copy(state)
+    def moveUp(self, heuristic):
+      if (self.zeroIdx > 2):
+        copyPuzzle = np.copy(self.board)
 
-        copyPuzzle[index], copyPuzzle[index - 3] = copyPuzzle[index - 3], copyPuzzle[index]
+        copyPuzzle[self.zeroIdx], copyPuzzle[self.zeroIdx - 3] = copyPuzzle[self.zeroIdx - 3], copyPuzzle[self.zeroIdx]
       
         child = Node(copyPuzzle)
         self.children.append(child)
@@ -130,10 +130,10 @@ class Node:
           child.heuristic = hsValue #Greedy
     
     def expandNode(self, heuristic):
-      self.moveDown(self.board, self.zeroIdx, heuristic)
-      self.moveUp(self.board, self.zeroIdx, heuristic)
-      self.moveRight(self.board, self.zeroIdx, heuristic)
-      self.moveLeft(self.board, self.zeroIdx, heuristic)
+      self.moveDown(heuristic)
+      self.moveUp(heuristic)
+      self.moveRight(heuristic)
+      self.moveLeft(heuristic)
     
     def goalTest(self):
       for i in range(len(self.board)):

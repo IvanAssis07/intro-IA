@@ -39,14 +39,14 @@ def executeAlgorithm(algorithm, showSteps, isTest):
 	elif (algorithm == "U"):
 		ucs(eightPuzzle, showSteps, isTest)
 	elif (algorithm == "A"):
-		aStar(eightPuzzle, "manhattanDist", showSteps, isTest)
-		# aStar(eightPuzzle, "misplacedTiles", showSteps, isTest)
+		# aStar(eightPuzzle, "manhattanDist", showSteps, isTest)
+		aStar(eightPuzzle, "misplacedTiles", showSteps, isTest)
 	elif (algorithm == "G"):
-		greedy(eightPuzzle, "manhattanDist", showSteps, isTest)
-		# greedy(eightPuzzle, "misplacedTiles", showSteps, isTest)
+		# greedy(eightPuzzle, "manhattanDist", showSteps, isTest)
+		greedy(eightPuzzle, "misplacedTiles", showSteps, isTest)
 		
 def main():
-	isTest = True
+	isTest = False
 	algorithm, showSteps = getEntry()
 	
 	executeAlgorithm(algorithm, showSteps, isTest)

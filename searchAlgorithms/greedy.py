@@ -4,8 +4,6 @@ import numpy as np
 from structures.stack import Stack
 from structures.node import Node
 
-GOAL_STATE = np.array([1,2,3,4,5,6,7,8,0])
-
 def greedy(initialState, heuristic, printSteps, isTest):
   if isTest:
     startingTime = time.time()
@@ -29,7 +27,7 @@ def greedy(initialState, heuristic, printSteps, isTest):
         currentNode.printPath()
       if isTest:
         executionTime = time.time() - startingTime
-        print("Exec time:", executionTime, "Explored nodes:", exploredNodes)
+        print("Exec time:", executionTime, "Explored nodes:", exploredNodes, "H:", heuristic)
       return
     
     explored.add(currentNode)
@@ -42,4 +40,5 @@ def greedy(initialState, heuristic, printSteps, isTest):
         frontier.remove(currentNode.children[i])
         frontier.append(currentNode.children[i])
 
+  print("No solution found")
   return

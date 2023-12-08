@@ -4,8 +4,6 @@ import numpy as np
 from structures.stack import Stack
 from structures.node import Node
 
-GOAL_STATE = np.array([1,2,3,4,5,6,7,8,0])
-
 def ucs(initialState, printSteps, isTest):
   if isTest:
     startingTime = time.time()
@@ -20,6 +18,9 @@ def ucs(initialState, printSteps, isTest):
     frontier.sort(key = lambda x: x.depth)
     currentNode = frontier.pop(0)
     
+    if isTest:
+      exploredNodes += 1
+
     if currentNode.goalTest():
       if printSteps:
         currentNode.printPath()
@@ -29,9 +30,6 @@ def ucs(initialState, printSteps, isTest):
       return  
     
     explored.add(currentNode)
-    if isTest:
-      exploredNodes += 1
-
     currentNode.expandNode(None)
 
     for i in range(len(currentNode.children)):
@@ -41,5 +39,6 @@ def ucs(initialState, printSteps, isTest):
         frontier.remove(currentNode.children[i])
         frontier.append(currentNode.children[i])
   
+  print("No solution found")
   return
   
